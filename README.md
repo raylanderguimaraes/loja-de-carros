@@ -1,5 +1,16 @@
 # Loja de carros
 
+## Tecnologias
+- Javascript
+- React Native
+- NodeJs
+- Mongoose
+- MongoDB
+- Express
+- Multer
+- JWT
+- Axios
+
 - Faça o clone do repositório usando git clone
 
 
@@ -8,6 +19,7 @@
 - Rode o comando *"npm run dev"* ou *"npm start"* para iniciar o servidor backend feito em NodeJs e buscar as informações no banco de dados.
 
 - O banco de dados utilizado foi o MongoDB, para conectar ao banco será necessário criar um arquivo ".env" na raiz do projeto contendo as variáveis de desenvolvimento que conectam ao banco de dados:
+- Para ter acesso ao banco de dados é possível usar o Mongodb Atlas, criar um cluster gratuito e testar as rotas.
 
 - DB_USER = usuario
 - DB_PASSWORD = senha
