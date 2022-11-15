@@ -1,8 +1,21 @@
 const router = require('express').Router();
-const multer = require('multer')
+const multer = require('multer');
+const fs = require('fs');
 
 const Cars = require('../models/Car');
-const upload = multer({dest: 'uploads'})
+
+const storage = multer.diskStorage({
+    filename: (req, file, cb) =>{
+        cb(null, Date.now() + '-' + file.originalname )
+    },
+    destination : (req, file, cb) =>{
+        cb(null,'./uploads' )
+    },
+   
+
+})
+
+const upload = multer({storage: storage})
 
 
 
@@ -11,9 +24,8 @@ const upload = multer({dest: 'uploads'})
 
 
 
-
-
-const auth = require('../controllers/authController')
+const auth = require('../controllers/authController');
+const { mongo } = require('mongoose');
 
 router.get('/', auth, (req, res) => {
     if (req.user.admin) {
@@ -24,22 +36,31 @@ router.get('/', auth, (req, res) => {
 
 })
 
+router.get('/uploads')
 
 //rota para adicionar carro na loja/db
 
 router.post('/post', auth, upload.single('file'), async (req, res) => {
     console.log(req.file)
+    // const file = fs.readFileSync(req.file.path)
+    // const base64File = Buffer.from(file).toString("base64");
+    
+    
+
     if (req.user.admin) {
         const { name, slug, brand, model, price } = await req.body
-
+        
+        const file = fs.readFileSync(`${req.file.path}`)
+        const base64File = Buffer.from(file).toString("base64")
+        // console.log(base64File)
         const car = {
             name,
             brand,
             model,
             slug,
             price,
-            image: req.file.path
-
+            image: base64File
+           
         }
 
         if (!name) {

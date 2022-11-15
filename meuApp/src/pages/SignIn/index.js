@@ -1,9 +1,30 @@
 import React from "react";
+import { useEffect, useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import api from '../../services/api'
+
+
+
+
 export default function SignIn() {
 
-    return (
 
+//     const [userLoged, setUserLoged ] = useState()
+
+//    api.post('/user/login', {
+//     email: "jocastha@gmail.com",
+//     password: "123454"
+//    }).then((response) =>{
+//     console.log(response)
+//    })
+//    .catch((err) => {
+//     console.log(err);
+//    })
+
+
+
+    return (
+        
         <View style={styles.container}>
             <View>
                 <Text style={styles.message}>Seja Bem Vindo!</Text>
@@ -16,6 +37,10 @@ export default function SignIn() {
                 <TextInput
                     style={styles.input}
                     placeholder="Digite um email..."
+                    
+                    
+                    autoCapitalize="none"
+                    autoCorrect={false}
 
                 />
 

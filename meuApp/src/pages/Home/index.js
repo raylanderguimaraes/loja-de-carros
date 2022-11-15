@@ -10,7 +10,6 @@ export default function Home() {
 
     const [data, setData] = useState([
     ]);
-
     const navigation = useNavigation();
 
 
@@ -21,7 +20,11 @@ export default function Home() {
         api.get('/')
             .then((response) => {
                 setData(response.data)
-                console.log(response.data)
+                // console.log(response.data)
+                
+            })
+            .catch((err) => {
+                console.log(err)
             })
 
 
@@ -48,6 +51,12 @@ export default function Home() {
 
             <View style={styles.line} />
 
+            <View>
+                <Text style={styles.textDescription}>
+                    CARROS USADOS
+                </Text>
+            </View>
+
             <FlatList
                 style={{ marginTop: 35 }}
                 contentContainerStyle={{ marginHorizontal: 20 }}
@@ -67,15 +76,27 @@ export default function Home() {
 }
 
 function ListItem({ data }) {
+
+
+    
+
+    
     return (
         <TouchableOpacity style={styles.listItem} >
+
             
-                <Image source={{ uri: data.image }} style={styles.Img} />
+            <Image style={styles.Img}
+                source={require('../../assets/golf.png')}
+            />
            
+           
+
+
             <Text style={styles.listText}>{data.name}</Text>
             <Text style={styles.listText}>{data.model}</Text>
             <Text style={styles.listText}>{data.brand}</Text>
             <Text style={styles.listPrice}>{data.price}</Text>
+            
         </TouchableOpacity>
     )
 }
@@ -148,17 +169,19 @@ const styles = StyleSheet.create({
         color: '#2280ff',
         alignSelf: "flex-start",
     },
-    containerImg: {
+    // containerImg: {
 
-        width: 300,
-        height: 300,
-        borderRadius: 8,
-
-    },
-    Img:{
-        width: 300,
+    //     width: 400,
+    //     height: 300,
+    //     borderRadius: 8,
+        
+    // },
+    Img: {
+        width: '100%',
+        borderRadius: 10,
         height: 300,
         resizeMode: 'cover',
+        alignSelf: 'center'
     },
 
 })
