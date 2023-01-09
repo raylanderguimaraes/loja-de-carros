@@ -5,21 +5,17 @@ const fs = require('fs');
 const Cars = require('../models/Car');
 
 const storage = multer.diskStorage({
-    filename: (req, file, cb) =>{
-        cb(null, Date.now() + '-' + file.originalname )
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + '-' + file.originalname)
     },
-    destination : (req, file, cb) =>{
-        cb(null,'./uploads' )
+    destination: (req, file, cb) => {
+        cb(null, './uploads')
     },
-   
+
 
 })
 
-const upload = multer({storage: storage})
-
-
-
-
+const upload = multer({ storage: storage })
 
 
 
@@ -44,23 +40,24 @@ router.post('/post', auth, upload.single('file'), async (req, res) => {
     console.log(req.file)
     // const file = fs.readFileSync(req.file.path)
     // const base64File = Buffer.from(file).toString("base64");
-    
-    
+
+
 
     if (req.user.admin) {
         const { name, slug, brand, model, price } = await req.body
-        
-        const file = fs.readFileSync(`${req.file.path}`)
-        const base64File = Buffer.from(file).toString("base64")
-        // console.log(base64File)
+
+
+        // const file = fs.readFileSync(`${req.file.path}`)
+        // const base64File = Buffer.from(file).toString("base64")
+       
         const car = {
             name,
             brand,
             model,
             slug,
             price,
-            image: base64File
-           
+            image: req.file.path.replace("\\", "/")
+
         }
 
         if (!name) {

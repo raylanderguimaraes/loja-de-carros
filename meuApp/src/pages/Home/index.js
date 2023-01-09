@@ -8,20 +8,19 @@ import api from '../../services/api'
 
 export default function Home() {
 
-    const [data, setData] = useState([
-    ]);
+    const [data, setData] = useState([]);
+
+
     const navigation = useNavigation();
-
-
-
 
     useEffect(() => {
 
         api.get('/')
             .then((response) => {
                 setData(response.data)
+
                 // console.log(response.data)
-                
+
             })
             .catch((err) => {
                 console.log(err)
@@ -29,8 +28,6 @@ export default function Home() {
 
 
     }, [])
-
-
 
 
     return (
@@ -53,7 +50,7 @@ export default function Home() {
 
             <View>
                 <Text style={styles.textDescription}>
-                    CARROS USADOS
+                    CARROS SEMINOVOS
                 </Text>
             </View>
 
@@ -65,11 +62,6 @@ export default function Home() {
                 renderItem={({ item }) => <ListItem data={item} />}
             />
 
-
-
-
-
-
         </SafeAreaView>
 
     )
@@ -77,26 +69,19 @@ export default function Home() {
 
 function ListItem({ data }) {
 
+    const ulr = 'http://10.0.0.133:3333/'
 
-    
-
-    
     return (
         <TouchableOpacity style={styles.listItem} >
 
-            
             <Image style={styles.Img}
-                source={require('../../assets/golf.png')}
+                source={{ uri: `${ulr}${data.image}` }}
             />
-           
-           
 
+            <Text style={styles.listText}>{data.name} {data.model}</Text>
+            <Text style={styles.listText}>Marca: {data.brand}</Text>
+            <Text style={styles.listPrice}>Preço: R${data.price}</Text>
 
-            <Text style={styles.listText}>{data.name}</Text>
-            <Text style={styles.listText}>{data.model}</Text>
-            <Text style={styles.listText}>{data.brand}</Text>
-            <Text style={styles.listPrice}>{data.price}</Text>
-            
         </TouchableOpacity>
     )
 }
@@ -126,7 +111,8 @@ const styles = StyleSheet.create({
 
     },
     textDescription: {
-        opacity: 0.4,
+        opacity: 0.5,
+        paddingHorizontal: 20,
         marginVertical: 20,
         fontFamily: 'Roboto_400Regular', fontSize: 20,
     },
@@ -159,29 +145,25 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     listText: {
+        fontFamily: 'Roboto_400Regular',
+        marginBottom: 5,
         fontSize: 25,
         color: '#000',
         alignSelf: "flex-start",
     },
     listPrice: {
         fontFamily: 'Roboto_400Regular',
-        fontSize: 22,
+        fontSize: 24,
         color: '#2280ff',
         alignSelf: "flex-start",
     },
-    // containerImg: {
 
-    //     width: 400,
-    //     height: 300,
-    //     borderRadius: 8,
-        
-    // },
     Img: {
         width: '100%',
         borderRadius: 10,
         height: 300,
         resizeMode: 'cover',
-        alignSelf: 'center'
+
     },
 
 })
@@ -206,19 +188,3 @@ const styles = StyleSheet.create({
 
 
 
-{/* <ScrollView>
-                <Text style={styles.textDescription}>
-                    CARROS USADOS
-                </Text>
-                <View style={{ flexDirection: 'column', alignItems: 'center' }}>
-                    <Cars
-                        
-                        img={require('../../assets/golf.png')}
-                        name="Volkswagen Polo TSI HIGHLINE"
-                        price="40.000" q
-                        onClick={() => navigation.navigate('Detail')}
-                    />
-                </View>
-            
-               
-            </ScrollView> */}

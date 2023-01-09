@@ -9,22 +9,24 @@ import api from '../../services/api'
 export default function SignIn() {
 
 
-//     const [userLoged, setUserLoged ] = useState()
+    //     const [userLoged, setUserLoged ] = useState()
 
-//    api.post('/user/login', {
-//     email: "jocastha@gmail.com",
-//     password: "123454"
-//    }).then((response) =>{
-//     console.log(response)
-//    })
-//    .catch((err) => {
-//     console.log(err);
-//    })
+    //    api.post('/user/login', {
+    //     email: "jocastha@gmail.com",
+    //     password: "123454"
+    //    }).then((response) =>{
+    //     console.log(response)
+    //    })
+    //    .catch((err) => {
+    //     console.log(err);
+    //    })
 
 
+    const [email, setEmail] = useState('');
+    const [senha, setPassword] = useState('');
 
     return (
-        
+
         <View style={styles.container}>
             <View>
                 <Text style={styles.message}>Seja Bem Vindo!</Text>
@@ -36,18 +38,18 @@ export default function SignIn() {
                 <Text style={styles.title}>Email</Text>
                 <TextInput
                     style={styles.input}
-                    placeholder="Digite um email..."
-                    
-                    
+                    placeholder="Digite seu email..."
                     autoCapitalize="none"
                     autoCorrect={false}
+                    onChangeText={text => setEmail(text)}
 
                 />
 
                 <Text style={styles.title}>Senha</Text>
                 <TextInput style={styles.input}
                     placeholder="Digite sua senha"
-
+                    onChangeText={text => setPassword(text)}
+                    autoCorrect={false}
                 />
 
 
@@ -108,7 +110,7 @@ const styles = StyleSheet.create({
         marginBottom: 12,
         fontSize: 16,
     },
-    
+
     button: {
         width: '100%',
         border: 'none',
@@ -128,7 +130,7 @@ const styles = StyleSheet.create({
     buttonRegister: {
         marginTop: 14,
         alignSelf: 'center',
-        
+
     },
 
     registerText: {

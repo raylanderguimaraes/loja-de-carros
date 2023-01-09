@@ -17,19 +17,16 @@ function Routes() {
                     name="Home"
                     component={Home}
                     options={{ headerShown: false }}
-
                 />
                 <Stack.Screen
                     name="Detail"
                     component={Detail}
                     options={{ headerShown: true }}
-
                 />
                 <Stack.Screen
                     name="SignIn"
                     component={SignIn}
                     options={{ headerShown: true }}
-
                 />
 
 
